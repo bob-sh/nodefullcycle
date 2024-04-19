@@ -20,9 +20,9 @@ services:
 
 
   nodejs:
-    image: node:latest
+    build: .
     container_name: nodejs
-    working_dir: /usr/src/app
+    entrypoint: dockerize -wait tcp://db:3306  docker-entrypoint.sh sh -c "npm install && node server.js"
     volumes:
       - ./app:/usr/src/app
     ports:
